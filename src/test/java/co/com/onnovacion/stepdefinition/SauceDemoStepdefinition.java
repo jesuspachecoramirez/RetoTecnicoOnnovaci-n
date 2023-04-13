@@ -76,19 +76,16 @@ public class SauceDemoStepdefinition extends SetUp{
 
     }
 
-
-    @Cuando("^se agrega un producto de la pagina al carrito$")
-    public void seAgregaUnProductoDeLaPaginaAlCarrito() {
-
-    try {
-        theActorInTheSpotlight()
-                .attemptsTo(
-                        simplelogin(),
-                        addproduct());
-    }catch (Exception exception){
-        LOGGER.error("No se pudo agregar el producto al carrito", exception);
-    }
-
+    @Cuando("^hace Login y agrega un producto de la pagina al carrito$")
+    public void haceLoginYAgregaUnProductoDeLaPaginaAlCarrito() {
+        try {
+            theActorInTheSpotlight()
+                    .attemptsTo(
+                            simplelogin(),
+                            addproduct());
+        }catch (Exception exception){
+            LOGGER.error("No se pudo agregar el producto al carrito", exception);
+        }
     }
 
 
@@ -99,31 +96,34 @@ public class SauceDemoStepdefinition extends SetUp{
 
     }
 
-    @Cuando("^se realiza el proceso de checkout para la compra del producto$")
-    public void seRealizaElProcesoDeCheckoutParaLaCompraDelProducto() {
-    credentials.setName(faker.name().firstName());
-    credentials.setLastName(faker.name().lastName());
-    credentials.setPostalCode(faker.number().digits(5));
-    try {
-        theActorInTheSpotlight()
-                .attemptsTo(
-                        simplelogin(),
-                        addproduct(),
-                        buyproduct()
-                                .buyerName(credentials.getName())
-                                .buyerLastName(credentials.getLastName())
-                                .buyerZip(credentials.getPostalCode())
-                );
-    }catch (Exception exception){
-        LOGGER.error("Error al realizar la compra", exception);
+    @Cuando("^se realiza el proceso de compra para realizar el checkout del producto$")
+    public void seRealizaElProcesoDeCompraParaRealizarElCheckoutDelProducto() {
+        credentials.setName(faker.name().firstName());
+        credentials.setLastName(faker.name().lastName());
+        credentials.setPostalCode(faker.number().digits(5));
+        try {
+            theActorInTheSpotlight()
+                    .attemptsTo(
+                            simplelogin(),
+                            addproduct(),
+                            buyproduct()
+                                    .buyerName(credentials.getName())
+                                    .buyerLastName(credentials.getLastName())
+                                    .buyerZip(credentials.getPostalCode())
+                    );
+        }catch (Exception exception){
+            LOGGER.error("Error al realizar la compra", exception);        }
     }
-    }
+
 
 
     @Entonces("^se valida el precio final sea el correcto$")
     public void seValidaElPrecioFinalSeaElCorrecto() {
-        theActorInTheSpotlight().should(seeThat(correctprice()));
+        theActorInTheSpotlight()
+                .should(seeThat(
+                        correctprice()));
     }
+
 
 
     @Entonces("^se recibe un mensaje de compra exitosa$")
@@ -140,6 +140,7 @@ public class SauceDemoStepdefinition extends SetUp{
        );
 
     }
+
 
 
 }

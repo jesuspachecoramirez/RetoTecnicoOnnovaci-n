@@ -15,11 +15,11 @@ Escenario: Deseo validar el correcto funcionamiento de la pagina home
 
 
 Escenario: Deseo agregar un producto al carrito de compras y validar que fue agregado
-  Cuando se agrega un producto de la pagina al carrito
+  Cuando hace Login y agrega un producto de la pagina al carrito
   Entonces se valida que el producto en el carrito corresponde con el agregado
 
 
  Escenario: Deseo realizar la compra del producto y me sea enviado
-   Cuando se realiza el proceso de checkout para la compra del producto
+   Cuando se realiza el proceso de compra para realizar el checkout del producto
    Entonces se valida el precio final sea el correcto
    Y se recibe un mensaje de compra exitosa
