@@ -1,0 +1,69 @@
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath('net.serenity-bdd:serenity-gradle-plugin:2.1.8')
+        classpath "net.serenity-bdd:serenity-single-page-report:2.2.0"
+    }
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
+
+ext{
+    serenityVersion = '2.1.8'
+    serenityCucumberVersion = '1.9.45'
+}
+
+dependencies {
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: "$rootProject.ext.serenityVersion"
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: "$rootProject.ext.serenityVersion"
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: "$rootProject.ext.serenityVersion"
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber', version: "$rootProject.ext.serenityCucumberVersion"
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation group: 'com.sun.jersey', name: 'jersey-client', version: '1.19.4'
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    annotationProcessor('org.projectlombok:lombok:1.18.26')
+    implementation group: 'log4j',                    name: 'log4j',                version: '1.2.17'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
+    implementation group: 'com.github.ozlerhakan', name: 'poiji', version: '3.0.3'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0'
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-core', version: "$rootProject.ext.serenityVersion"
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-junit', version: "$rootProject.ext.serenityVersion"
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'io.projectreactor', name: 'reactor-core', version: '3.4.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
+
+
+
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding='UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate, reports)

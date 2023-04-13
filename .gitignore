@@ -1,0 +1,89 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.exe
+*.o
+*.so
+
+
+#Intellij
+out/
+
+.idea/
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+#Gradle
+/.gradle/
+.gradle/5*
+.gradle/build*
+.gradle/vcs*
+.idea/**/gradle.xml
+.idea/**/libraries
+/build
+#Drivers
+drvers/
+
+#Serenity BDD
+target/
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.iws
+.sts4-cache/
+
+#Scala ID specific
+.cache-main
+.scala_dependencies
+.worksheet
+
+#Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.ctxt
+hs_err_pid*
+*.ear
+*.tar.gz
+*.war
+
+.idea/codestream.xml
+.idea/$CACHE_FILES$
+.idea/**/sonarIssues.xml
+.ide/**/sonarlint/
+.idea/**/markdown-navigator
+/.idea/
+
+
